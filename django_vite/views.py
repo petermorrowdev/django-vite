@@ -6,6 +6,11 @@ from django_vite.core.asset_loader import DjangoViteAssetLoader
 
 
 def vite_static_redirect(request, path, insecure=False):
+    """Tries to get static file from Django then falls back to vite's dev server.
+
+    Run in dev mode with `./manage.py --nostatic` and vite's dev server running
+    in another terminal.
+    """
     try:
         response = serve(request, path, insecure)
     except Http404 as e:
